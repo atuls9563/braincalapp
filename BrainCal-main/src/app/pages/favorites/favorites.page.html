@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Favorites</ion-title>
+  </ion-toolbar>
+
+  <!-- <ion-searchbar [(ngModel)]="searchKeyword" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"
+    (ionClear)="clearSearch()" (ionCancel)="onCancel($event)"></ion-searchbar> -->
+</ion-header>
+
+<div *ngIf="requestInProgress">
+  <div class="preloader"></div>
+</div>
+
+<ion-content>
+  <ion-row class="tricks-row">
+    <div class="tricks-list">
+      <ion-list>
+        <ion-item *ngFor="let post of posts; let i=index">
+          <div class="favorite">
+            <div (click)="removeFavorite(post.id,i)">
+              <ion-icon ios="remove" md="remove"></ion-icon>
+            </div>
+          </div>
+          <div class="trick-title" (click)="openDetailPage(post)" [innerHTML]="post.title.rendered"></div>
+          <div class="read-more">
+            <button class="ReadMoreCls" (click)="openDetailPage(post)">Read More</button>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf="posts.length==0 && !requestInProgress">
+          <div>No Contents available.</div>
+        </ion-item>
+
+        <ion-item *ngIf="posts.length==0 && requestInProgress">
+          <div *ngIf="requestInProgress">Loading Contents...</div>
+        </ion-item>
+
+      </ion-list>
+    </div>
+    <div class="infinitte-scroll">
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </ion-row>
+
+</ion-content>

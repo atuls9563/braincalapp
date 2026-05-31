@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">    
+    <ion-back-button></ion-back-button>
+    <ion-title *ngIf="trick.title.rendered" [innerHTML]="trick.title.rendered"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="trick-content">
+
+  <div *ngIf="trick" class="single-trick">
+    <h2 [innerHTML]="trick.title.rendered"></h2>
+    <div class="trick-details">  
+      <div *ngIf="userFavorites" class="favorite">
+          <div *ngIf="userFavorites.indexOf(trick.id)==-1" (click)="addFavorite(trick.id)">
+            <!-- <ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon> -->
+            <ion-icon ios="heart-outline" md="heart-outline"></ion-icon>
+          </div>   
+          <div *ngIf="userFavorites.indexOf(trick.id)>=0" (click)="removeFavorite(trick.id)">
+            <!-- <ion-icon ios="ios-heart" md="md-heart"></ion-icon> -->
+            <ion-icon ios="heart" md="heart"></ion-icon>
+          </div>     
+      </div>
+      <div></div>
+      <div *ngIf="trick.cover_image!=''">
+              <img [src]="trick.cover_image" #coverImage (tap)="showCover(coverImage)"/>
+          
+      </div>
+      
+      <div [innerHTML]="trick.content.rendered"></div>
+
+      <div *ngIf="trick.expression">
+        <div class="playground-title"><h3>Excersie Here</h3></div>
+        <form  [formGroup]="playForm" (ngSubmit)="calculate(playForm.valid)" class="playground">
+          <div class="row">
+            <ion-col>
+              <ion-input type="number" placeholder="First Number" [ngClass]="{'has-error':!playForm.controls['firstNumber'].valid}"  formControlName="firstNumber"></ion-input>
+            </ion-col>
+            <ion-col class="operand">
+              <div>{{trick.expression}}</div>
+            </ion-col>
+            <ion-col>
+              <ion-input type="number" placeholder="Second Number" [ngClass]="{'has-error':!playForm.controls['secondNumber'].valid}"  formControlName="secondNumber"></ion-input>
+            </ion-col>
+          </div>
+          <div class="button-container">
+            <button type="submit" [disabled]="!playForm.valid" ion-button>Show Result</button>
+          </div>
+          <div *ngIf="result" class="result"><b>Answer:{{result}}</b></div>
+        </form>  
+      </div>
+
+       <div *ngIf="trick.video" class="video-container" >
+        
+          <iframe width="100%" [src]="getVideoURL()" frameborder="0" allowfullscreen></iframe>
+          <div class="video-fix"></div>  
+        </div>
+
+    </div>
+  </div>
+</ion-content>

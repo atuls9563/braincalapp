@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="type=='maths_11'">11 Plus Maths</ion-title>
+    <ion-title *ngIf="type=='english_11'">11 Plus English</ion-title>
+    <ion-title *ngIf="type=='science_11'">11 Plus Science</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="trick-content">
+
+ <div *ngIf="type=='maths_11'" class="tricks-level">
+    <ion-list>
+        <ion-item lines="none" color="none" (click)="openElPlusPage(24,'11 Plus Maths Level 1')">
+            <ion-label>
+              <div class="labelCls">
+                Level 1
+              </div>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none" color="none" (click)="openElPlusPage(23,'11 Plus Maths Level 2')">
+            <ion-label>
+              <div class="labelCls">
+                Level 2
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none" color="none" (click)="openElPlusPage(25,'11 Plus Maths Level 3')">
+            <ion-label>
+              <div class="labelCls">
+                Level 3
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none" color="none" (click)="openQuizPage(2,'11+ Maths Marathon')">
+            <ion-label>
+              <div class="labelCls">
+                11+ Maths Marathon Test
+             </div>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</div>
+ <div *ngIf="type=='english_11'"  class="tricks-level">
+    <ion-list>
+        <ion-item  lines="none" color="none" (click)="openElPlusPage(27,'11 Plus English Level 1')">
+            <ion-label>
+              <div class="labelCls">
+                Level 1
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item  lines="none" color="none" (click)="openElPlusPage(28,'11 Plus English Level 2')">
+            <ion-label>
+              <div class="labelCls">
+                Level 2
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item  lines="none" color="none" (click)="openElPlusPage(29,'11 Plus English Level 3')">
+            <ion-label>
+              <div class="labelCls">
+                Level 3
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item  lines="none" color="none" (click)="openQuizPage(1,'11+ English Marathon')">
+            <ion-label>
+              <div class="labelCls">
+                11+ English Marathon Test
+             </div>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</div>
+<div *ngIf="type=='science_11'" class="tricks-level">
+    <ion-list>
+        <ion-item lines="none" color="none" (click)="openElPlusPage(39,'11 Plus Biology')">
+            <ion-label>
+              <div class="labelCls">
+                Biology
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none" color="none" (click)="openElPlusPage(38,'11 Plus Chemistry')">
+            <ion-label>
+              <div class="labelCls">
+                Chemistry
+             </div>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none" color="none" (click)="openElPlusPage(37,'11 Plus Physics')">
+            <ion-label>
+              <div class="labelCls">
+                Physics
+             </div>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</div>
+
+</ion-content>

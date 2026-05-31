@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar class="new-background-color"> 
+    <ion-back-button slot="start" defaultHref="profile"></ion-back-button>  
+    <ion-title>General Knowledge</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="requestInProgress">
+  <div  class="preloader"></div>   
+</div>
+
+<ion-content>
+
+  <div *ngIf="quizStarted && !quizCompleted" class="countdown-wrap">
+    <span class="question-title">Question {{slideCount}}.</span>
+    <div class="timer-countdown">{{timeString}}</div>
+</div> 
+<ion-slides #slides (ionSlideDidChange)="slideChanged()"> 
+    <ion-slide *ngFor="let question of questions; let i = index;">
+      <ion-header *ngIf="!quizCompleted">
+      <ion-row>
+        <ion-col>
+      <ion-list >
+        <ion-radio-group >
+          <ion-list-header>
+            <ion-label>
+              <h3 class="question">
+                <span [innerHTML]="question.questionText"></span>
+              </h3>
+            </ion-label>
+          </ion-list-header>
+      
+          <ion-item *ngFor="let answer of question.answers; let j = index;">
+            <ion-radio slot="end" (click)="selectAnswer(i,j)"  *ngIf="question.type=='radio'"></ion-radio>
+            <ion-label>{{j+1}}. {{answer.text}}</ion-label>
+        </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+      <ion-button size="light" *ngIf="i<questions.length-1" (click)="nextSlide(i)">Next</ion-button>
+      <ion-button size="light" *ngIf="i==questions.length-1" (click)="nextSlide(i)">Finish</ion-button>
+     </ion-col>
+  </ion-row>
+</ion-header>
+      </ion-slide>
+
+
+      
+
+      <!-- <ion-slide class="result-slide" *ngIf="quizCompleted">
+       
+        <ion-label >Congratulations – you have completed 
+          <span>{{quiz.name}}</span>. You scored 
+          <span>{{totalScore}}</span> point(s) out of 
+          <span>{{questions.length}}</span> points total.
+            Here are the details for incorrect answers:
+          </ion-label>        
+       
+
+        <ion-list no-lines radio-group *ngFor="let question of questions; let i= index;">
+          <h3>Question {{i+1}}</h3>
+            <h3 [innerHTML]="question.questionText"></h3>
+        
+            <ion-list *ngIf="question.selected_answer_index!=null" no-lines radio-group>
+              <ion-item *ngFor="let answer of question.answers; let j = index;">
+                <ion-label>{{j+1}}. {{answer.text}}</ion-label>
+                <ion-label  *ngIf="j==question.selected_answer_index && !answer.correct"><ion-icon name="close"></ion-icon></ion-label>
+                <ion-label  *ngIf="j==question.selected_answer_index && answer.correct"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-label>
+                <ion-label  *ngIf="j!=question.selected_answer_index && answer.correct"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-label>
+              </ion-item>
+            </ion-list>
+
+            <ion-list *ngIf="question.selected_answer_index==null" no-lines radio-group>
+              <ion-item>
+                <ion-label >No answer selected.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-list>
+       </ion-slide> -->
+
+    <ion-slide *ngIf="questions.length==0">
+        <ion-label>This test series has no questions yet.</ion-label>
+    </ion-slide>
+    
+</ion-slides>
+
+
+
+
+<div *ngIf="quizCompleted" class="quiz-results" >
+  <ion-label class="quizCompleted">Congratulations – you have completed 
+  <span>{{quiz.name}}</span>. You scored 
+  <span>{{totalScore}}</span> point(s) out of 
+  <span>{{questions.length}}</span> points total.
+    Here are the details for incorrect answers:
+  </ion-label>        
+<ion-list no-lines radio-group *ngFor="let question of questions; let i= index;">
+  <h5 class="ion-text-center">Question {{i+1}}</h5>
+    <h6 [innerHTML]="question.questionText"></h6>
+
+    <ion-list *ngIf="question.selected_answer_index!=null" no-lines radio-group>
+      <ion-item *ngFor="let answer of question.answers; let j = index;">
+        <ion-label>{{j+1}}. {{answer.text}}</ion-label>
+        <ion-label class="quiz-incorrect" *ngIf="j==question.selected_answer_index && !answer.correct"><ion-icon name="close"></ion-icon></ion-label>
+        <ion-label class="quiz-correct" *ngIf="j==question.selected_answer_index && answer.correct"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-label>
+        <ion-label class="quiz-correct" *ngIf="j!=question.selected_answer_index && answer.correct"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="question.selected_answer_index==null" no-lines radio-group>
+      <ion-item>
+        <ion-label >No answer selected.</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+</div>
+
+</ion-content>

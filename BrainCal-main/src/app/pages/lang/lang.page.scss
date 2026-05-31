@@ -1,0 +1,42 @@
+.new-background-color{
+    --background: #2788E8;
+  }
+
+  ion-title {
+    color: white;
+}
+
+ion-menu-button{
+    color: white;
+}
+
+ion-back-button{
+    float: left;
+    color: #FFF;  
+  }
+
+.single-trick{
+  // padding: 10px;
+  padding-left: 20px;
+    padding-right: 20px;
+}
+
+.favorite{ 
+  position: absolute; 
+  right: 25px; 
+  top: 21px; 
+  z-index: 0;
+  color: #FFF;
+  font-size: 25px;
+}
+
+.trick-content .single-trick h2 {
+  padding: 5px 25px 5px 10px;
+  color: #FFF;
+  background-color: #0088e8;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+

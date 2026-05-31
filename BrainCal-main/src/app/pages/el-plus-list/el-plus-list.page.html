@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">    
+    <ion-back-button></ion-back-button>
+    <ion-title [innerHTML]="heading"></ion-title>
+  </ion-toolbar>
+
+  <ion-searchbar
+  [(ngModel)]="searchKeyword"
+  [showCancelButton]="shouldShowCancel"
+  (ionInput)="onInput($event)"
+  (ionClear)="clearSearch()"
+  (ionCancel)="onCancel($event)"></ion-searchbar>
+</ion-header>
+
+<div *ngIf="requestInProgress" class="preloader-wrap">
+  <div  class="preloader"></div>   
+</div>  
+
+<ion-content (swipe)="onSwipeUp($event)">
+  <ion-row class="tricks-row">
+    <div class="search-results">
+      <ul>
+        <li *ngFor="let post of suggestions">
+          <div class="result" (click)="openDetailPage(post)" [innerHTML]="post.title.rendered"></div>
+            <!-- <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" ></ion-icon> -->
+            <div class="result-forward-outline">
+              <ion-icon class="go-to-link" name="chevron-forward-outline"></ion-icon>
+            </div>
+        </li>
+      </ul>
+    </div>
+
+  <div class="tricks-list">    
+      <ion-list>
+        <ion-item *ngFor="let post of posts">
+          <div *ngIf="userFavorites" class="favorite">
+            <div *ngIf="userFavorites.indexOf(post.id)==-1" (click)="addFavorite(post.id)">
+              <!-- <ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon> -->
+              <ion-icon ios="heart-outline" md="heart-outline"></ion-icon>
+            </div>   
+            <div *ngIf="userFavorites.indexOf(post.id)>=0" (click)="removeFavorite(post.id)">
+              <!-- <ion-icon ios="ios-heart" md="md-heart"></ion-icon> -->
+              <ion-icon ios="heart" md="heart"></ion-icon>
+            </div>     
+          </div>
+          <div class="trick-title"  (click)="openDetailPage(post)" [innerHTML]="post.title.rendered" ></div>
+          <div class="read-more">
+            <button class="ReadMoreCls" (click)="openDetailPage(post)">Read More</button>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf="posts.length==0 && !requestInProgress">     
+          <div>No Content available.</div>
+        </ion-item>
+
+        <ion-item *ngIf="posts.length==0 && requestInProgress">   
+          <div *ngIf="requestInProgress">Loading Contents...</div>    
+        </ion-item>
+
+      </ion-list>
+  </div>
+  <div >
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  </div>
+</ion-row>
+</ion-content>

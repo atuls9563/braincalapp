@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">    
+    <ion-back-button></ion-back-button>
+    <ion-title *ngIf="post.title.rendered" [innerHTML]="post.title.rendered"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="trick-content">
+  <div *ngIf="post" class="single-trick">
+    <h2 [innerHTML]="post.title.rendered"></h2>
+    <div class="trick-details">  
+        <div *ngIf="userFavorites" class="favorite">
+            <div *ngIf="userFavorites.indexOf(post.id)==-1" (click)="addFavorite(post.id)">
+              <!-- <ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon> -->
+              <ion-icon ios="heart-outline" md="heart-outline"></ion-icon>
+            </div>   
+            <div *ngIf="userFavorites.indexOf(post.id)>=0" (click)="removeFavorite(post.id)">
+              <!-- <ion-icon ios="ios-heart" md="md-heart"></ion-icon> -->
+              <ion-icon ios="heart" md="heart"></ion-icon>
+            </div>     
+      </div>
+      <div></div>
+      
+      <div *ngIf="post.cover_image!=''">
+        <img [src]="post.cover_image" #coverImage (tap)="showCover(coverImage)"/>
+      </div>
+
+      <div [innerHTML]="post.content.rendered"></div>
+      <div *ngIf="post.answer">
+          <div *ngIf="showAnswer">Correct Answer is: <b [innerHTML]="post.answer"></b></div>
+          <a *ngIf="!showAnswer" (click)="getAnswer()">Show Answer</a>
+      </div>
+    </div>
+  </div>
+</ion-content>
