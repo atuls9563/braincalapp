@@ -1,0 +1,126 @@
+diff --git a/third-party-podspecs/boost.podspec b/third-party-podspecs/boost.podspec
+index 1234567..abcdefg 100644
+--- a/third-party-podspecs/boost.podspec
++++ b/third-party-podspecs/boost.podspec
+@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
+   spec.summary = 'Boost provides free peer-reviewed portable C++ source libraries.'
+   spec.authors = 'Rene Rivera'
+-  spec.source = { :http => 'https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.bz2',
++  spec.source = { :http => 'https://archives.boost.org/release/1.76.0/source/boost_1_76_0.tar.bz2',
+                   :sha256 => 'f0397ba6e982c4450f27bf32a2a83292aba035b827a5623a14636ea583318c41' }
+ 
+   # Pinning to the same version as React.podspec.
+
+diff --git a/Libraries/Components/DatePicker/DatePickerIOS.js b/Libraries/Components/DatePicker/DatePickerIOS.js
+new file mode 100644
+index 0000000..a1b2c3d 100644
+--- /dev/null
++++ b/Libraries/Components/DatePicker/DatePickerIOS.js
+@@ -0,0 +1,14 @@
++/**
++ * @format
++ * Shim so Metro can resolve DatePickerIOS (platform-specific files exist as .ios.js / .android.js)
++ */
++'use strict';
++
++const {Platform} = require('../../Utilities/Platform');
++module.exports =
++  Platform.OS === 'ios'
++    ? require('./DatePickerIOS.ios')
++    : require('./DatePickerIOS.android');
++
+
+diff --git a/Libraries/Components/DrawerAndroid/DrawerLayoutAndroid.js b/Libraries/Components/DrawerAndroid/DrawerLayoutAndroid.js
+new file mode 100644
+index 0000000..b2c3d4e 100644
+--- /dev/null
++++ b/Libraries/Components/DrawerAndroid/DrawerLayoutAndroid.js
+@@ -0,0 +1,14 @@
++/**
++ * @format
++ * Shim so Metro can resolve DrawerLayoutAndroid (platform-specific files exist as .android.js / .ios.js)
++ */
++'use strict';
++
++const {Platform} = require('../../Utilities/Platform');
++module.exports =
++  Platform.OS === 'android'
++    ? require('./DrawerLayoutAndroid.android')
++    : require('./DrawerLayoutAndroid.ios');
++
+
+diff --git a/Libraries/Image/Image.js b/Libraries/Image/Image.js
+new file mode 100644
+index 0000000..c3d4e5f 100644
+--- /dev/null
++++ b/Libraries/Image/Image.js
+@@ -0,0 +1,14 @@
++/**
++ * @format
++ * Shim so Metro can resolve Image (platform-specific files exist as .ios.js / .android.js)
++ */
++'use strict';
++
++const {Platform} = require('../Utilities/Platform');
++module.exports =
++  Platform.OS === 'ios'
++    ? require('./Image.ios').default
++    : require('./Image.android').default;
++
+
+diff --git a/Libraries/Components/ProgressBarAndroid/ProgressBarAndroid.js b/Libraries/Components/ProgressBarAndroid/ProgressBarAndroid.js
+new file mode 100644
+index 0000000..d4e5f6a 100644
+--- /dev/null
++++ b/Libraries/Components/ProgressBarAndroid/ProgressBarAndroid.js
+@@ -0,0 +1,14 @@
++/**
++ * @format
++ * Shim so Metro can resolve ProgressBarAndroid (platform-specific files exist as .android.js / .ios.js)
++ */
++'use strict';
++
++const {Platform} = require('../../Utilities/Platform');
++module.exports =
++  Platform.OS === 'android'
++    ? require('./ProgressBarAndroid.android')
++    : require('./ProgressBarAndroid.ios');
++
+
+diff --git a/Libraries/Components/ProgressViewIOS/ProgressViewIOS.js b/Libraries/Components/ProgressViewIOS/ProgressViewIOS.js
+new file mode 100644
+index 0000000..e5f6a7b 100644
+--- /dev/null
++++ b/Libraries/Components/ProgressViewIOS/ProgressViewIOS.js
+@@ -0,0 +1,14 @@
++/**
++ * @format
++ * Shim so Metro can resolve ProgressViewIOS (platform-specific files exist as .ios.js / .android.js)
++ */
++'use strict';
++
++const {Platform} = require('../../Utilities/Platform');
++module.exports =
++  Platform.OS === 'ios'
++    ? require('./ProgressViewIOS.ios').default
++    : require('./ProgressViewIOS.android').default;
++
+
+diff --git a/Libraries/Components/ToastAndroid/ToastAndroid.js b/Libraries/Components/ToastAndroid/ToastAndroid.js
+new file mode 100644
+index 0000000..f6a7b8c 100644
+--- /dev/null
++++ b/Libraries/Components/ToastAndroid/ToastAndroid.js
+@@ -0,0 +1,14 @@
++/**
++ * @format
++ * Shim so Metro can resolve ToastAndroid (platform-specific files exist as .android.js / .ios.js)
++ */
++'use strict';
++
++const {Platform} = require('../../Utilities/Platform');
++module.exports =
++  Platform.OS === 'android'
++    ? require('./ToastAndroid.android')
++    : require('./ToastAndroid.ios');
++

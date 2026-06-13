@@ -1,0 +1,50 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
+
+# React Native Firebase requires static frameworks (firebase-ios-sdk v9+)
+use_frameworks! :linkage => :static
+$RNFirebaseAsStaticFramework = true
+
+# Flipper disabled when using use_frameworks!
+flipper_config = FlipperConfiguration.disabled
+
+target 'Braincal' do
+  config = use_native_modules!
+
+  pod 'react-native-fbsdk-next', :path => '../node_modules/react-native-fbsdk-next'
+
+  flags = get_default_flags()
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    :hermes_enabled => true,
+    :fabric_enabled => flags[:fabric_enabled],
+    :flipper_configuration => flipper_config,
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+
+  target 'BraincalTests' do
+    inherit! :complete
+  end
+
+  post_install do |installer|
+    react_native_post_install(
+      installer,
+      :mac_catalyst_enabled => false
+    )
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    # Fix boost: std::unary_function removed in C++17 (Xcode 15+) — apply to all targets that include boost
+    # Disable bitcode for all pods (App Store rejects bitcode; Hermes prebuilt may contain it — strip in app target)
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
+        to_str = ->(v) { v.is_a?(Array) ? v.join(' ') : (v || '$(inherited)') }
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = to_str.call(config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']) + ' BOOST_NO_CXX98_FUNCTION_BASE=1'
+        config.build_settings['OTHER_CPLUSPLUSFLAGS'] = to_str.call(config.build_settings['OTHER_CPLUSPLUSFLAGS']) + ' -DBOOST_NO_CXX98_FUNCTION_BASE=1'
+      end
+    end
+  end
+end

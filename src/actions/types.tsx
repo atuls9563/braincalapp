@@ -1,0 +1,17 @@
+export const PRE_LOADER = "PRE_LOADER";
+export const SET_USER = "SET_USER";
+export const SET_TRICKS_DATA = "SET_TRICKS_DATA";
+export const SET_READ_MORE_DATA = "SET_READ_MORE_DATA";
+export const SET_LEVEL_DATA = "SET_LEVEL_DATA";
+export const SET_LANGUAGE_DATA = "SET_LANGUAGE_DATA";
+export const SET_SEARCH_POSTS = "SET_SEARCH_POSTS";
+
+export const FAVOURITES_ID = "FAVOURITES_ID";
+export const ADD_FAVOURITE = "ADD_FAVOURITE";
+export const REMOVE_FAVOURITE = "REMOVE_FAVOURITE";
+export const SET_FAVOURITES_POSTS = "SET_FAVOURITES_POSTS";
+export const SET_QUESTIONS = "SET_QUESTIONS";
+export const ON_SELECT_ANS = "ON_SELECT_ANS";
+export const SET_MY_PLAN = "SET_MY_PLAN";
+export const SET_TIMER_COUNTDOWN = "SET_TIMER_COUNTDOWN";
+export const LOGOUT = "LOGOUT";

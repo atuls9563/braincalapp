@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1025970758368",
+    "project_id": "braincal-b621f",
+    "storage_bucket": "braincal-b621f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025970758368:android:0dde44125f4a5162f2e685",
+        "android_client_info": {
+          "package_name": "com.apps.braincal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025970758368-540edoqfl1clt52bletsivpdmhp9pqoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWSeT1qdR6p0-MEsKiAWj8_zEJAIF8INE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025970758368-540edoqfl1clt52bletsivpdmhp9pqoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
